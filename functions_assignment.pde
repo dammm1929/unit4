@@ -5,16 +5,28 @@ color green = #CAFFBF;
 color cyan = #9BF6FF;
 color blue = #A0C4FF;
 color purp = #BDB2FF;
+int a;
+int x;
+int y;
 
 void setup() {
+  a = 0;
+  x = 100;
+  y = 150;
   size(800, 800);
   background(random(0, 255), random(0, 255), random(0, 255));
   strokeWeight(3);
-  for(int i = 0; i < 10; i += 1) {
-    house(random(0, 800), random(0,800), random(.5, 1.2), random(radians(0),radians(360)));
+  while (a < 9) {
+    house(x,y, 0.7, 0);
+    a += 1;
+    x += 200;
+    if (x == 700) {
+      x = 100;
+      y += 230;
+    }
   }
 }
-
+// colour rotation size placement
 void draw() {
 
 }
@@ -60,11 +72,12 @@ void window() {
 void roof() {
   stroke(0);
   fill(random(0, 255), random(0, 255), random(0, 255));
-  triangle(-30, 0, 230, 0, 100, -100);
+  //triangle(-30, 0, 230, 0, 100, -100);
+  triangle(-30, 0, 230, 0, 100, random(-150,-50));
 }
 
 void chim() {
   stroke(0);
   fill(random(0, 255), random(0, 255), random(0, 255));
-  rect(140, 0, 30, -120);
+  rect(140, 0, 30, random(-140,-100));
 }
