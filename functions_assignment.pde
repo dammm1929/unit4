@@ -8,6 +8,7 @@ color purp = #BDB2FF;
 int a;
 int x;
 int y;
+float curve;
 
 void setup() {
   a = 0;
@@ -50,7 +51,8 @@ void house(float x, float y, float s, float r) { // these variables only exist w
 void building() {
   stroke(0);
   fill(random(0, 255), random(0, 255), random(0, 255));
-  rect(0,0, 200,170);
+  curve = random(5,50);
+  rect(0,0, 200,170, 0, 0, curve, curve);
 }
 
 void door() {
