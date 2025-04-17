@@ -8,6 +8,7 @@ int treeplace;
 int treeplacey;
 int toptrees;
 int cloudplace;
+//int steamplace;
 
 
 void setup() {
@@ -23,13 +24,14 @@ void setup() {
   treeplacey = 300;
   toptrees = -50;
   cloudplace = 50;
+  //steamplace = -20;
   track();
   cloud(0,20);
   cloud(70,100);
   cloud(150,50);
   cloud(300,90);
   cloud(200,-20);
-  
+
   
   for (int p = 0; p < 22; p += 1) {
     tree(random(0, 10) + toptrees, random(250,280));
@@ -46,8 +48,9 @@ void setup() {
     }
   }
   
-  windowcar(400,500);
-  coalcar(575,500);
+  windowcar(450,500);
+  coalcar(625,500);
+  frontcar(800,480);
   
 }
 
@@ -123,6 +126,35 @@ void coalcar(float x, float y) {
   
 }
 
+void frontcar(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  fill(red);
+  stroke(#985151);
+  rect(0,40, 150,60);
+  rect(0,0, 90,100);
+  noStroke();
+  rect(60,43, 60,55);
+  stroke(#C4C6C6);
+  fill(#F7F7F7);
+  rect(0,0, 90,-15);
+  stroke(#059AFA);
+  fill(#00D7FF);
+  rect(30,20,80,30);
+  line(55,35, 55,50);
+  line(85,35, 85,50);
+  steam(5,-60, -20);
+  steam(50,-60, -20);
+  stroke(0);
+  fill(0);
+  rect(50,-20, 13,-10);
+  rect(15,-20, 18,-10);
+  wheel(30,110);
+  wheel(120,110);
+  popMatrix();
+  
+}
+
 void coal() {
   fill(#242424);
   stroke(#242424);
@@ -145,6 +177,13 @@ void cloudball(float x, float y) {
   ellipse(x,y, random(40,70), random(40,50));
 }
 
+void steamball(float x, float y) {
+  fill(255);
+  strokeWeight(1);
+  noStroke();
+  ellipse(x,y, random(14,21), random(14,16));
+}
+
 void cloud(float x, float y) {
   pushMatrix();
   translate(x,y);
@@ -157,4 +196,24 @@ void cloud(float x, float y) {
     }
   }
   popMatrix();
+}
+
+void steam(float x, float y, int steamplace) {
+  pushMatrix();
+  translate(x, y);
+  steamball(8,23);
+  steamball(8,23);
+  for (int a = 0; a < 12;) {
+    steamball(random(-9,3) - steamplace, random(-6,3) - steamplace + 5);
+    
+    a += 1;
+    steamplace += 10;
+    if (a == 6) {
+      steamplace -= 60;
+    }
+  }
+  
+  
+  popMatrix();
+  
 }
