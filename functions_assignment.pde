@@ -8,6 +8,10 @@ int treeplace;
 int treeplacey;
 int toptrees;
 int cloudplace;
+float cartype = random(0,2);
+float carplace = random(0,4);
+float carplace2;
+int placement;
 //int steamplace;
 
 
@@ -48,8 +52,19 @@ void setup() {
     }
   }
   
-  windowcar(450,500);
-  coalcar(625,500);
+  if (carplace <= 1) {
+    carplace2 = -75;
+  }
+  
+  if (cartype <= 1) {
+    storagecar(carplace2, 500);
+  }
+  
+  // 175 apart
+  // place at x -75, 100, 275, 450, 625
+  //storagecar(275,500);
+  //windowcar(450,500);
+  //coalcar(625,500);
   frontcar(800,480);
   
 }
@@ -74,8 +89,18 @@ void wheel(float x, float y) {
   fill(#3D3E3E);
   stroke(#3D3E3E);
   circle(0,0, 20);
-  
   popMatrix();
+  
+}
+
+void guy() {
+  float x = random(40,110);
+  float y = random(32,38);
+  noStroke();
+  fill(0, 0, 0, 100);
+  circle(x, y, 15);
+  stroke(0, 0, 0, 100);
+  line(x,y + 8.5, x, 55);
   
 }
 
@@ -98,6 +123,9 @@ void windowcar(float x, float y) {
   rect(155,60, 15,5);
   wheel(30,90);
   wheel(120,90);
+  guy();
+  guy();
+  guy();
   popMatrix();
 }
 
@@ -126,6 +154,27 @@ void coalcar(float x, float y) {
   
 }
 
+void storagecar(float x, float y) {
+  strokeWeight(5);
+  pushMatrix();
+  translate(x, y);
+  fill(red);
+  stroke(#985151);
+  rect(0,0, 150,80);
+  line(25,0, 25,80);
+  line(50,0, 50,80);
+  line(75,0, 75,80);
+  line(100,0, 100,80);
+  line(125,0, 125,80);
+  line(0,15, 150,15);
+  fill(#3D3E3E);
+  stroke(#3D3E3E);
+  rect(155,60, 15,5);
+  wheel(30,90);
+  wheel(120,90);
+  popMatrix();
+}
+
 void frontcar(float x, float y) {
   pushMatrix();
   translate(x, y);
@@ -147,8 +196,8 @@ void frontcar(float x, float y) {
   steam(50,-60, -20);
   stroke(0);
   fill(0);
-  rect(50,-20, 13,-10);
-  rect(15,-20, 18,-10);
+  rect(50,-18, 13,-11);
+  rect(15,-18, 18,-11);
   wheel(30,110);
   wheel(120,110);
   popMatrix();
