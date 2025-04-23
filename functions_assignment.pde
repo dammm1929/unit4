@@ -8,9 +8,8 @@ int treeplace;
 int treeplacey;
 int toptrees;
 int cloudplace;
-float cartype = random(0,2);
-float carplace = random(0,4);
-float carplace2;
+float cartype = random(0,3);
+float carplace = -75;
 int placement;
 //int steamplace;
 
@@ -24,6 +23,8 @@ void setup() {
   rect(0,0, 1000,600);
   fill(blue);
   rect(0,0, 1000,250);
+  fill(#E3E0E0);
+  rect(0,600,1000,200);
   treeplace = -50;
   treeplacey = 300;
   toptrees = -50;
@@ -52,21 +53,25 @@ void setup() {
     }
   }
   
-  if (carplace <= 1) {
-    carplace2 = -75;
+  for (int i = 0; i < 5; i += 1) {
+    if (cartype <= 1 && cartype >= 0) {
+      storagecar(carplace, 500);
+      carplace += 175;
+    }
+    
+    if (cartype <= 2 && cartype > 1) {
+      windowcar(carplace, 500);
+      carplace += 175;
+    }
+    
+    if (cartype <= 3 && cartype > 2) {
+      coalcar(carplace, 500);
+      carplace += 175;
+    }
+    cartype = random(0,3);
   }
   
-  if (cartype <= 1) {
-    storagecar(carplace2, 500);
-  }
-  
-  // 175 apart
-  // place at x -75, 100, 275, 450, 625
-  //storagecar(275,500);
-  //windowcar(450,500);
-  //coalcar(625,500);
   frontcar(800,480);
-  
 }
 
 
@@ -77,10 +82,19 @@ void track() {
 }
 
 void tree(float a, float b) {
+  float star = random(0,500);
   strokeWeight(5);
   stroke(#527953);
-  fill(green);
-  triangle(a,b, a+random(65,75),b, a+random(30,40),b-random(80,100));
+  //fill(green);
+  fill(0, random(130,180), 0);
+  triangle(a-random(5,10),b, a+random(50,55),b, a+random(20,25),b-random(50,70));
+  triangle(a,b-random(20,30), a+random(45,55),b-random(20,30), a+random(22,27),b-random(70,90));
+  triangle(a,b-random(40,50), a+random(45,55),b-random(40,50), a+random(18,22),b-random(90,110));
+  if (star >= 50 && star <= 51) {
+    stroke(#FCE800);
+    fill(#FCE800);
+    circle(a+20,b-100, 20);
+  }
 }
 
 void wheel(float x, float y) {
@@ -161,11 +175,11 @@ void storagecar(float x, float y) {
   fill(red);
   stroke(#985151);
   rect(0,0, 150,80);
-  line(25,0, 25,80);
-  line(50,0, 50,80);
-  line(75,0, 75,80);
-  line(100,0, 100,80);
-  line(125,0, 125,80);
+  int p = 25;
+  for (int i = 0; i < 5; i += 1) {
+    line(p,0, p,80);
+    p += 25;
+  }
   line(0,15, 150,15);
   fill(#3D3E3E);
   stroke(#3D3E3E);
