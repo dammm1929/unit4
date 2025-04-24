@@ -11,14 +11,14 @@ int cloudplace;
 float cartype = random(0,3);
 float carplace = -75;
 int placement;
+int waveX = 100;
 //int steamplace;
-
+//E3E0E0
 
 void setup() {
   size(1000,800);
   strokeWeight(3);
-  background(255);
-  fill(#59BC5D);
+  fill(#59BC5D); //green
   noStroke();
   rect(0,0, 1000,600);
   fill(blue);
@@ -77,6 +77,8 @@ void setup() {
 
 void track() {
   tile(-25);
+  pillars(50);
+
 
 
 }
@@ -88,12 +90,12 @@ void tree(float a, float b) {
   //fill(green);
   fill(0, random(130,180), 0);
   triangle(a-random(5,10),b, a+random(50,55),b, a+random(20,25),b-random(50,70));
-  triangle(a,b-random(20,30), a+random(45,55),b-random(20,30), a+random(22,27),b-random(70,90));
+  triangle(a,b-random(20,30), a+random(45,55),b-random(20,30), a+random(22,27),b-random(70,85));
   triangle(a,b-random(40,50), a+random(45,55),b-random(40,50), a+random(18,22),b-random(90,110));
   if (star >= 50 && star <= 51) {
     stroke(#FCE800);
     fill(#FCE800);
-    circle(a+20,b-100, 20);
+    circle(a+20,b-100, 15);
   }
 }
 
@@ -225,6 +227,7 @@ void coal() {
 }
 
 void tile(int x) {
+  strokeWeight(5);
   stroke(#545555);
   fill(#8B8B8B);
   for (int i = 0; i < 20; i += 1) {
@@ -233,6 +236,33 @@ void tile(int x) {
   }
 }
 
+void pillars(int x) {
+  strokeWeight(5);
+  stroke(#545555);
+  fill(#59BC5D);
+  for (int i = 0; i < 5; i += 1) {
+    ellipse(x,810, 180,200);
+    x += 300;
+  }
+  shore(-100,650);
+}
+  
+void shore(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  noFill();
+  strokeWeight(7);
+  stroke(66,115,236);
+  for (int i = 0; i < 20; i += 1) {
+    //if (waveX >= 0 && waveX <= 150) {
+      arc(waveX,99,50,10,radians(0),radians(180),OPEN); //upwave
+      arc(52+waveX,100,50,10,radians(180),radians(360),OPEN);
+      waveX += 100;
+    //}
+  }
+  popMatrix();
+}
+  
 void cloudball(float x, float y) {
   fill(255);
   strokeWeight(3);
