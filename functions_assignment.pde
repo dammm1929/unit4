@@ -7,6 +7,7 @@ color blue = #9BF4FF;
 int treeplace;
 int treeplacey;
 int toptrees;
+int bottrees;
 int cloudplace;
 float cartype = random(0,3);
 float carplace = -75;
@@ -28,6 +29,7 @@ void setup() {
   treeplace = -50;
   treeplacey = 300;
   toptrees = -50;
+  bottrees = -50;
   cloudplace = 50;
   //steamplace = -20;
   track();
@@ -37,11 +39,12 @@ void setup() {
   cloud(300,90);
   cloud(200,-20);
 
-  
   for (int p = 0; p < 22; p += 1) {
     tree(random(0, 10) + toptrees, random(250,280));
     toptrees += 50;
   }
+  
+
   
   for (int i = 0; i < 126; i += 1) {
     tree(random(0, 10) + treeplace, random(0, 100) + treeplacey);
@@ -72,6 +75,11 @@ void setup() {
   }
   
   frontcar(800,480);
+  
+  for (int k = 0; k < 10; k += 1) {
+    foretree(random(0, 10) + bottrees, random(930,1050));
+    bottrees += random(150,250);
+  }
 }
 
 
@@ -80,8 +88,8 @@ void track() {
   pillars(50);
 
 
-
 }
+
 
 void tree(float a, float b) {
   float star = random(0,500);
@@ -97,6 +105,14 @@ void tree(float a, float b) {
     fill(#FCE800);
     circle(a+20,b-100, 15);
   }
+}
+
+void foretree(float a, float b) {
+  strokeWeight(5);
+  stroke(#527953);
+  //fill(green);
+  fill(0, random(130,180), 0);
+  triangle(a-random(40,80),b, a+random(250,260),b, a+random(90,110),b-random(240,320));
 }
 
 void wheel(float x, float y) {
@@ -244,23 +260,58 @@ void pillars(int x) {
     ellipse(x,810, 180,200);
     x += 300;
   }
+  
   shore(-100,650);
+}
+
+void nofills(int x) {
+  strokeWeight(80);
+  stroke(#E3E0E0);
+  noFill();
+  for (int i = 0; i < 5; i += 1) {
+    ellipse(x,790, 249,250);
+    x += 300;
+  }
+  x = 50;
+  strokeWeight(5);
+  stroke(#545555);
+  noFill();
+  for (int i = 0; i < 5; i += 1) {
+    ellipse(x,810, 173,200);
+    x += 300;
+  }
 }
   
 void shore(float x, float y) {
   pushMatrix();
   translate(x, y);
+  int waveY;
+  waveY = 100;
   noFill();
   strokeWeight(7);
-  stroke(66,115,236);
-  for (int i = 0; i < 20; i += 1) {
-    //if (waveX >= 0 && waveX <= 150) {
-      arc(waveX,99,50,10,radians(0),radians(180),OPEN); //upwave
-      arc(52+waveX,100,50,10,radians(180),radians(360),OPEN);
+  stroke(#6FBCF5);
+  for (int p = 0; p < 20; p += 1) {
+    waveX = 100;
+    for (int i = 0; i < 20; i += 1) {
+      arc(waveX,waveY-1,50,10,radians(0),radians(180),OPEN); //upwave
+      arc(52+waveX,waveY,50,10,radians(180),radians(360),OPEN);
       waveX += 100;
-    //}
+    }
+    waveY += 5;
+  }
+  noFill();
+  strokeWeight(10);
+  stroke(#CCCE70);
+  waveY = 100;
+  waveX = 100;
+  for (int i = 0; i < 20; i += 1) {
+    strokeWeight(random(14,20));
+    arc(waveX,waveY-1,50,10,radians(0),radians(180),OPEN); //upwave
+    arc(52+waveX,waveY,50,10,radians(180),radians(360),OPEN);
+    waveX += 100;
   }
   popMatrix();
+  nofills(50);
 }
   
 void cloudball(float x, float y) {
